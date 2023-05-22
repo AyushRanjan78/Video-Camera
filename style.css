@@ -1,0 +1,156 @@
+* {
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+
+.video-container {
+    height: 100vh;
+    width: 100vw;
+    background: rgb(54, 46, 46);
+    /* background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ9_KsknS57lQXqTTXdG6nnJvcR1LKEpubnSwUnavfHQ&usqp=CAU&ec=48665698"); */
+}
+
+video {
+    height: 100%;
+    width: 100%;
+}
+
+.controls {
+    position: absolute;
+    top: 25vh;
+    right: 5vw;
+    /* border: 1px solid red; */
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 160px;
+    z-index: 3;
+    align-items: center;
+}
+
+.controls > div {
+    width: 50%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#record {
+    border: 5px solid rgb(250, 246, 246);
+    border-radius: 50%;
+}
+
+.inner-record {
+    height: 70%;
+    width: 70%;
+    background: red;
+    border-radius: 50%;
+}
+
+#capture {
+    border: 5px solid white;
+    border-radius: 50%;
+}
+
+.inner-capture {
+    height: 70%;
+    width: 70%;
+    background: rgb(248, 246, 246);
+    border-radius: 50%;
+}
+
+.animate-record {
+    animation-name: scaleInScaleOut;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+.animate-capture {
+    animation-name: scaleInScaleOut;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+.video-filters {
+    position: absolute;
+    top: 10vh;
+    /* border: 1px solid white; */
+    left: 10vh;
+    z-index: 3;
+}
+
+.filter {
+    height: 14vh;
+    width: 7vw;
+    /* background: aquamarine; */
+    /* border: 1px solid white; */
+    border: 4px solid rgb(1, 1, 1);
+    background-image: url("https://media.istockphoto.com/id/1322277517/photo/wild-grass-in-the-mountains-at-sunset.jpg?s=612x612&w=0&k=20&c=6mItwwFFGqKNKEAzv0mv6TaxhLN3zSE43bWmFN--J5w=");
+    background-size: cover;
+    background-blend-mode: soft-light;
+}
+
+.filter-div {
+    position: absolute;
+    top: 0px;
+    height: 100vh;
+    width: 100vw;
+}
+
+.zoom {
+    flex-direction: column;
+    /* border: 1px solid white; */
+    /* background-color: lightblue; */
+}
+
+
+.zoom div {
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background: black; */
+    width: 100%;
+    border: 2px solid rgb(10, 8, 8);
+    border-radius: 40%;
+    background-color: rgb(64, 124, 154);
+
+}
+/* .zoom:hover{
+    color: rgb(17, 20, 13);
+} */
+
+.fa-solid {
+    font-size: 1.5rem;
+    color: rgb(10, 9, 9);
+}
+
+.gallery-btn {
+    background: rgb(3, 0, 0);
+    border-radius: 50%;
+    color: rgb(254, 252, 252);
+    font-size: 20px;
+    cursor: pointer;
+    border: 2px solid rgb(244, 234, 234);
+}
+
+/* .gallery-btn:hover{
+    color: white;
+} */
+
+@keyframes scaleInScaleOut {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
