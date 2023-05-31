@@ -1,106 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <div>
-      DBName:
-      <input id="dbName" type="text" />
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <title>Camera</title>
+</head>
+<body>
+    <div class="video-container">
+        <video autoplay></video>
     </div>
-    <div>
-      DBVersion:
-      <input id="dbVersion" type="text" />
-    </div>
-    <button id="openDB">Open Database</button>
-
-    <div>
-      MediaID:
-      <input id="mid" type="text" />
-    </div>
-    <div>
-      MediaType:
-      <input id="mediatype" type="text" />
+    <div class="video-filters">
+        <div class="filter" style="background-color : rgba(177, 177, 65, 0.2)"></div>
+        <div class="filter" style="background-color : rgba(102,0,255,0.2)"></div>
+        <div class="filter" style="background-color : rgba(0,255,153,0.2)"></div>
+        <div class="filter" style="background-color : rgba(0,153,255,0.2)"></div>
+        <div class="filter" style="background-color : rgba(177, 62, 62, 0.2)"></div>
+        <div class="filter"></div>
     </div>
 
-    
 
-    <button id="addmedia">Add media</button>
+    <div class="controls">
+        <div class="zoom">
+            <div class="zoomIn">
+                <i class="fa-solid fa-plus"></i>
+            </div>
+            <div class="zoomOut">
+                <i class="fa-solid fa-minus"></i>
+            </div>
+        </div>
+        <div id="record">
+            <div class="inner-record"></div>
+        </div>
+        <div id="capture">
+            <div class="inner-capture"></div>
+        </div>
+        <div class="gallery-btn">Gallery</div>
+    </div>
 
-    <button id="showmedia">Show media</button>
-  </body>
-
-  <script>
-    let dbName = document.getElementById("dbName");
-    let dbVersion = document.getElementById("dbVersion");
-    let openButton = document.getElementById("openDB");
-
-    let mid = document.getElementById("mid");
-    let mediaType = document.getElementById("mediatype");
-    let addMediaButton = document.getElementById("addmedia");
-    let showmediaButton = document.getElementById("showmedia");
-
-    openButton.addEventListener("click", openDB);
-
-    addMediaButton.addEventListener("click", addMedia);
-
-    showmediaButton.addEventListener("click", showmedia);
-
-    let db;
-
-
-    function showmedia(){
-      let txnobject = db.transaction("Media", "readonly");
-      let mediaTable = txnobject.objectStore("Media");
-
-
-      let cursorObject = mediaTable.openCursor(); // to iterate over all the rows/tuples
-
-      cursorObject.onsuccess = function(e) {
-        let cursor = cursorObject.result;
-        if(cursor){
-            console.log(cursor.value);
-            cursor.continue();
-        }
-
-      }
-
-
-    }
-
-    function addMedia() {
-      let txnobject = db.transaction("Media", "readwrite"); // start  transaction on media table
-      let mediaTable = txnobject.objectStore("Media"); // get access to media table
-
-      mediaTable.add({ mid: mid.value, type: mediaType.value });
-
-      txnobject.onerror = function (e) {
-        console.log("transaction failed");
-        console.log(e)
-      };
-    }
-
-    function openDB() {
-        console.log("inside opendb");
-      let dbOpenRequest = indexedDB.open(dbName.value, dbVersion.value);
-
-      
-      dbOpenRequest.onupgradeneeded = function (e) {
-        alert("Inside on upgrade");
-         db=e.target.result;
-          console.log(db);
-         db.createObjectStore("Media",{keyPath : "mid"});
-      };
-      dbOpenRequest.onsuccess = function (e) {
-        alert("Inside on success");
-         db=e.target.result;
-      };
-      dbOpenRequest.onerror = function (e) {
-        alert("Inside on error");
-      };
-    }
-  </script>
+     <script src="./db.js"></script>
+    <script src="./script.js"></script>
+</body>
 </html>
